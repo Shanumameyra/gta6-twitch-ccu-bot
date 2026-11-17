@@ -21,10 +21,10 @@ Same protocol as v1, over the kit's 34 usable comparables — the profile for ea
 | model | LOO, all 34 | LOO, console-only (8) | wins vs v1 |
 |---|---|---|---|
 | v1 pooled profile | 0.5573 | 0.2569 | — |
-| **v2 kernel profile** | **0.4166** | **0.1956** | **31/34 (8/8 console)** |
+| **v2 kernel profile** | **0.3799** | **0.1956** | **29/34 (8/8 console)** |
 | house baseline | 0.6930 | 0.3226 | — |
 
-v2 is 25% better than v1 overall and 24% better on the console launches closest to GTA VI. The bandwidth and the 3x bonus were picked on a coarse grid and the loss surface is flat around them (0.378–0.391 across bandwidth 0.8–1.5), so the gain is not a knife-edge fit. Where v2 still loses: a few small hour-1 launches (Marathon, Resident Evil Requiem, Monster Hunter Wilds) whose local shape the kernel pool estimates noisily.
+v2 is 32% better than v1 overall and 24% better on the console launches closest to GTA VI. The bandwidth and the 3x bonus were picked on a coarse grid and the loss surface is flat around them (0.378–0.391 across bandwidth 0.8–1.5), so the gain is not a knife-edge fit. Where v2 still loses: a few small hour-1 launches (Resident Evil Requiem, Monster Hunter Wilds, Call of Duty: Black Ops 6, Marathon, Halo Infinite) whose local shape the kernel pool estimates noisily.
 
 ## Run it
 
