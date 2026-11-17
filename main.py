@@ -124,11 +124,25 @@ def baseline_quantiles(p1, h):
     return [p1 * math.exp(z * SIGMA * math.sqrt(h - 1)) for z in Z]
 
 
+def hour1_print(case):
+    """Hour-1 print, with a fallback so a case without one still forecasts.
+
+    Normally the case's `known` row for hour 1. If it is missing, use the
+    most recent pre-checkpoint hourly mean from `history_hourly` instead of
+    crashing (a crash scores the case as if every quantile equalled the
+    hour-1 print and forfeits any prize). If that is missing too, raise.
+    """
+    first = next((k for k in case.get("known", []) if k["hour"] == 1), None)
+    if first is not None and first.get("viewers"):
+        return max(1, first["viewers"])
+    hist = case.get("history_hourly") or []
+    if hist and hist[-1].get("viewers"):
+        return max(1, hist[-1]["viewers"])
+    raise ValueError("case has no hour-1 print and no usable history")
+
+
 def forecast_case(case):
-    first = next((k for k in case["known"] if k["hour"] == 1), None)
-    if first is None:
-        raise ValueError("case has no hour-1 print")
-    p1 = max(1, first["viewers"])
+    p1 = hour1_print(case)
     pool = []
     for comp in sorted(case.get("comparables", []), key=lambda c: c.get("name", "")):
         s = launch_series(comp)
